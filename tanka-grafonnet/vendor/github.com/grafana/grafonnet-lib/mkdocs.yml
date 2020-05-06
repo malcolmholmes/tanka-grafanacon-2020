@@ -1,0 +1,12 @@
+site_name: Grafonnet
+theme:
+  name: 'material'
+  palette:
+    primary: 'Deep orange'
+    accent: 'Orange'
+nav:
+  - Home: 'index.md'
+  - Getting Started: 'getting-started.md'
+  - Examples: 'examples.md'
+  - Style Guide: 'style-guide.md'
+  - Comunity Plugins: 'community-plugins.md'

@@ -1,0 +1,117 @@
+{
+   "advanced": {
+      "columns": [
+         {
+            "text": "Users",
+            "value": "Users"
+         }
+      ],
+      "datasource": "$PROMETHEUS",
+      "description": "description",
+      "sort": {
+         "col": 1,
+         "desc": true
+      },
+      "span": 12,
+      "styles": [
+         {
+            "alias": "Users",
+            "colorMode": "row",
+            "colors": [
+               "rgba(245,54,54,0.9)",
+               "rgba(237,129,40,0.89)",
+               "rgba(50,172,45,0.97)"
+            ],
+            "pattern": "Users",
+            "thresholds": [
+               "0",
+               "50"
+            ],
+            "type": "number",
+            "unit": "none"
+         }
+      ],
+      "targets": [ ],
+      "timeFrom": "24h",
+      "timeShift": "1h",
+      "title": "test",
+      "transform": "table",
+      "transparent": true,
+      "type": "table"
+   },
+   "basic": {
+      "columns": [ ],
+      "datasource": null,
+      "span": 12,
+      "styles": [ ],
+      "targets": [ ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "test",
+      "type": "table"
+   },
+   "hideColumns": {
+      "columns": [ ],
+      "datasource": null,
+      "span": 12,
+      "styles": [
+         {
+            "alias": "Time",
+            "pattern": "Time",
+            "type": "hidden"
+         },
+         {
+            "alias": "Space",
+            "pattern": "Space",
+            "type": "hidden"
+         }
+      ],
+      "targets": [ ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "test",
+      "type": "table"
+   },
+   "targets": [
+      {
+         "columns": [ ],
+         "datasource": null,
+         "span": 12,
+         "styles": [ ],
+         "targets": [
+            {
+               "a": "foo",
+               "refId": "A"
+            },
+            {
+               "b": "foo",
+               "refId": "B"
+            }
+         ],
+         "timeFrom": null,
+         "timeShift": null,
+         "title": "with targets",
+         "type": "table"
+      },
+      {
+         "columns": [ ],
+         "datasource": null,
+         "span": 12,
+         "styles": [ ],
+         "targets": [
+            {
+               "a": "foo",
+               "refId": "A"
+            },
+            {
+               "b": "foo",
+               "refId": "\u0083"
+            }
+         ],
+         "timeFrom": null,
+         "timeShift": null,
+         "title": "with batch targets",
+         "type": "table"
+      }
+   ]
+}

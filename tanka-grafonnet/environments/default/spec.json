@@ -1,0 +1,12 @@
+{
+  "apiVersion": "tanka.dev/v1alpha1",
+  "kind": "Environment",
+  "metadata": {
+    "name": "environments/default"
+  },
+  "spec": {
+    "injectLabels": true,
+    "apiServer": "https://localhost:7556",
+    "namespace": "default"
+  }
+}
