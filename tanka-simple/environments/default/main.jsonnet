@@ -18,10 +18,15 @@ k + {
     grafana: 'grafana/grafana',
   },
 
-  grafana_configmap: configMap.new('grafana-config')
+  grafana_provisioning_configmap: configMap.new('grafana-dashboard-provisioning')
     + configMap.withData({
       'dashboards.yaml': importstr 'files/dashboards.yaml',
-      'dashboard.json': importstr 'files/dashboard.json',
+      'dashboard.json': importstr 'files/dashboard.json'
+    })
+    ,
+
+  grafana_configmap: configMap.new('grafana-config')
+    + configMap.withData({
       'grafana.ini': importstr 'files/grafana.ini',
     })
     ,
@@ -32,7 +37,7 @@ k + {
     ,
 
   grafana_deployment: deployment.new('grafana', $._config.replicas, grafana_container, {})
-    + $.util.configVolumeMount('grafana-config', '/etc/grafana/provisioning/dashboards')
+    + $.util.configVolumeMount('grafana-dashboard-provisioning', '/etc/grafana/provisioning/dashboards')
     + $.util.configVolumeMount('grafana-config', '/etc/grafana-config')
     ,
 
