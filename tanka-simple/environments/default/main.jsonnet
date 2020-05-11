@@ -1,8 +1,8 @@
-local kausal = import 'ksonnet-util/kausal.libsonnet';
+local k = import 'ksonnet-util/kausal.libsonnet';
 
-kausal + {
+k + {
   local deployment = $.apps.v1.deployment,
-  local container = deployment.mixin.spec.template.spec.containersType,
+  local container = $.core.v1.container,
   local containerPort = $.core.v1.containerPort,
   local mount = container.volumeMountsType,
   local volume = $.core.v1.volume,
@@ -22,19 +22,22 @@ kausal + {
     + configMap.withData({
       'dashboards.yaml': importstr 'files/dashboards.yaml',
       'dashboard.json': importstr 'files/dashboard.json',
+      'grafana.ini': importstr 'files/grafana.ini',
     })
     ,
 
   local grafana_container = container.new('grafana', $._images.grafana)
-    .withPorts(containerPort.new('http', 3000))
+    + container.withPorts(containerPort.new('http', 3000))
+    + container.withEnvMap({GF_PATHS_CONFIG: '/etc/grafana-config/grafana.ini'})
     ,
 
   grafana_deployment: deployment.new('grafana', $._config.replicas, grafana_container, {})
     + $.util.configVolumeMount('grafana-config', '/etc/grafana/provisioning/dashboards')
+    + $.util.configVolumeMount('grafana-config', '/etc/grafana-config')
     ,
 
   grafana_service: $.util.serviceFor(self.grafana_deployment)
-   + service.mixin.spec.withPortsMixin(servicePort.newNamed(name='http', port=80, targetPort=3000))
-   + service.mixin.spec.withType('LoadBalancer')
-  ,
+    + service.mixin.spec.withPortsMixin(servicePort.newNamed(name='http', port=80, targetPort=3000))
+    + service.mixin.spec.withType('LoadBalancer')
+    ,
 }
