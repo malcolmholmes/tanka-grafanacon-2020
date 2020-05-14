@@ -1,6 +1,5 @@
 local prometheus = import 'prometheus.libsonnet';
 local disk = import 'disk_space.libsonnet';
-local memory = import 'memory.libsonnet';
 
 prometheus + {
   grafanaDashboards+:: {
